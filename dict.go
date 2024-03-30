@@ -43,6 +43,11 @@ func parseAndPrint(dictionary []Dictionary)  {
 func main()  {
 
   words := os.Args[1:]
+
+  if len(words) == 0 {
+    log.Fatalf("Please enter a word get the meaning")
+  }
+
   encodedURL := fmt.Sprintf(url, words[0])
 
   response := getMeaning(encodedURL)
@@ -50,14 +55,19 @@ func main()  {
 
   body, error := io.ReadAll(response.Body)
   if error != nil {
-    fmt.Printf("Error reading the meaning from response %s", error)
+    fmt.Printf("Error reading the meaning from response -> %s", error)
     return
   }
 
   var dictionary []Dictionary
+
+  if len(dictionary) == 0 {
+    log.Fatalf("Unable find meaning for the given word -> %s", words[0])
+  }
+
   error = json.Unmarshal(body, &dictionary)
   if error != nil {
-    log.Fatalf(" word %v", error)
+    log.Fatalf("Unable to read the meaning for the given word -> %v", error)
   }
 
   parseAndPrint(dictionary)
