@@ -1,3 +1,11 @@
+#binary name
+BINARY_NAME=dict
+
+#installation dir
+INSTALL_DIR=/usr/local/bin/
+
+all: build
+
 build:
 	@go build -o bin/go-dict
 
@@ -6,3 +14,6 @@ run: build
 
 test:
 	go test -v ./...
+
+install: build
+	cp $(BINARY_NAME) $(INSTALL_DIR)
