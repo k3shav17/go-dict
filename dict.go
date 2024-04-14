@@ -21,7 +21,7 @@ type Meaning struct {
 }
 
 type Definition struct {
-  Definition string `json:"definition`
+  Definition string `json:"definition"`
 }
 
 func getMeaning(encodedURL string) *http.Response  {
@@ -33,10 +33,14 @@ func getMeaning(encodedURL string) *http.Response  {
 }
 
 func parseAndPrint(dictionary []Dictionary)  {
-  for _, word := range dictionary[:1] {
-    fmt.Println("Word: ", word.Word)
-    fmt.Println("Phonetic: ", word.Phonetic)
-    fmt.Println("Meaning: ", word.Meanings[0].Definitions[0].Definition)
+  fmt.Printf("Word -> %s \n", dictionary[0].Word)
+  fmt.Printf("Phonetic -> %s \n", dictionary[0].Phonetic)
+  definitions := dictionary[0].Meanings[0].Definitions
+
+  fmt.Println("Definitions ")
+  for _, definition := range definitions {
+    fmt.Println("\t| ")
+    fmt.Printf("\t -> %s \n", definition.Definition)
   }
 }
 
