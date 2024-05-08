@@ -1,3 +1,5 @@
+.PHONY: install
+
 #binary name
 BINARY_NAME=dict
 
@@ -16,4 +18,4 @@ test:
 	go test -v ./...
 
 install: build
-	cp $(BINARY_NAME) $(INSTALL_DIR)
+	sudo cp $(BINARY_NAME) $(INSTALL_DIR)
